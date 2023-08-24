@@ -2,7 +2,7 @@ name: Greetings
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "mainvik" ]
 jobs:
   greeting:
     runs-on: ubuntu-latest
@@ -11,4 +11,4 @@ jobs:
     - name: List files
       run: ls -ltr
     - name: Echo simple message
-      run: echozzzz "Hello Pranjal"
+      run: echo "Hello Pranjal"
