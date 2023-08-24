@@ -82,5 +82,5 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          repository: psrv3/batchsevengithub-action
+          repository: vikram37/githubaction
           tag_with_ref: true
