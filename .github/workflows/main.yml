@@ -11,4 +11,4 @@ jobs:
     - name: List files
       run: ls -ltr
     - name: Echo simple message
-      run: echo "Hello Pranjal"
+      run: echozzzz "Hello Pranjal"
