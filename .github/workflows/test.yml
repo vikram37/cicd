@@ -10,7 +10,7 @@ jobs:
   build-test:
     strategy:
       matrix:
-        os: [ubuntu-latest ]
+        os: [ubuntu-latest, macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v3
@@ -34,7 +34,21 @@ jobs:
         path: junit/test-results.xml
       # Use always() to always run this step to publish test results when there are test failures
       if: ${{ always() }}
-      build-and-push-docker-image-to-github-packages:
+    
+#     - name: Run tests with coverage
+#       run: |
+#           coverage run -m pytest test.py
+#           coverage xml -o coverage.xml
+#           coverage report -m
+#       working-directory: /home/runner/work/batchsevenproject/batchsevenproject
+
+#     - name: Upload coverage report
+#       uses: actions/upload-artifact@v2
+#       with:
+#           name: coverage-report
+#           path: coverage.xml
+
+  build-and-push-docker-image-to-github-packages:
     runs-on: ubuntu-latest 
     permissions: 
       contents: read
@@ -70,4 +84,3 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
           repository: vikram37/newtestrepo2
           tag_with_ref: true
-    
