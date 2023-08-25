@@ -34,4 +34,40 @@ jobs:
         path: junit/test-results.xml
       # Use always() to always run this step to publish test results when there are test failures
       if: ${{ always() }}
+      build-and-push-docker-image-to-github-packages:
+    runs-on: ubuntu-latest 
+    permissions: 
+      contents: read
+      packages: write 
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Build container image
+      uses: docker/build-push-action@v1
+      with: 
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: docker.pkg.github.com
+        repository: ${{ github.repository }}/flaskapptest
+        tag_with_sha: true
+        tag_with_ref: true
+  
+  build-and-push-docker-image-to-dockerhub:
+    runs-on: ubuntu-latest   
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+            
+      - name: Run Docker container
+        run: |
+          docker run hello-world
+          echo ${{ env.MY_ENV_VAR }}
+        
+      - name: Push to docker Hub
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          repository: vikram37/newtestrepo2
+          tag_with_ref: true
     
